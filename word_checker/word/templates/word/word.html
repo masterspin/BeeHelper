@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {% load static %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
 </head>
 
@@ -44,6 +45,14 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-offset-0 is-12">
+                    <div class="content">
+                        <h1>Upload</h1>
+                        <form method = "post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="file" name = "document">
+                            <button type = "submit">Upload Text File</button>
+                        </form>
+                    </div>
                     {% for word_attribute in word_data %}
                     <div class="box">
                         <article class="media">
