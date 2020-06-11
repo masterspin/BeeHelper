@@ -20,7 +20,7 @@
             </div>
         </div>
     </section>
-    <section class="section">
+   <!--  <section class="section">
         <div class="container">
             <div class="columns">
                 <div class="column is-offset-4 is-4">
@@ -30,27 +30,23 @@
                             <div class="control is-expanded">
                                 {{form.name}}
                             </div>
-                            <div class="control">
-                                <button type = "submit" class="button is-info">
-                                    Add Word
-                                </button>
-                            </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <section class="section">
         <div class="container">
             <div class="columns">
                 <div class="column is-offset-0 is-12">
                     <div class="content">
                         <h1>Upload</h1>
+                        <p>Each word should be on its own line</p>
                         <form method = "post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="file" name = "document">
-                            <button type = "submit">Upload Text File</button>
+                            <button type = "submit">Upload <b>Text(.txt)</b> File</button>
                         </form>
                     </div>
                     {% for word_attribute in word_data %}
