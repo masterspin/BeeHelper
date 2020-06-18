@@ -7,16 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     {% load static %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css" />
 </head>
 
 <body>
-    <section class="hero is-primary">
+    <section class="hero is-small is-link is-bold">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">
-                    Spelling Bee Helper
+                <h1 class="title is-2 is-family-monospace">
+                    BeeHelper
+                    <a href="https://icons8.com/icon/79908/musicbee">
+                        <img src="https://img.icons8.com/color/48/000000/musicbee.png"/>
+                    </a>
                 </h1>
+
             </div>
         </div>
     </section>
@@ -36,31 +41,47 @@
             </div>
         </div>
     </section> -->
-    <section class="section">
+    <section class="section has-background-light">
         <div class="container">
             <div class="columns">
                 <div class="column is-offset-0 is-12">
                     <div class="content">
-                        <h1>Upload</h1>
+                        <h2>Upload Process</h2>
                         <p>Step 1: Choose File</p>
                         <p>Step 2: Upload File</p>
                         <p>Step 3: Download CSV File</p>
                         <form method = "post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <input type="file" name = "document">
-                            <button type = "submit">Upload <b>Text(.txt)</b> File</button>
+                            <div class="column is-one-fifth">
+                            <p class="control has-icons-left has-icons-right">
+                                <input class="input is-info is-small is-link is-rounded" type="file" name = "document">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                </span>
+                            </p>
+                            <p>
+                                <button class="button is-small is-link is-rounded" type = "submit">Upload &nbsp;<b> Text(.txt) &nbsp;</b> File</button>
+                            </p>
+                            </div>
                         </form>
                         <form action = "/download">
-                        <input type="submit" value="Download CSV file of  words uploaded" />
+                            <div class="column is-one-fifth">
+                            <p class="control has-icons-left has-icons-right">
+                            <input class="input is-info is-small is-link is-rounded" type="submit" value="Download CSV file of  words uploaded" />
+                            <span class="icon is-small is-left">
+                                    <i class="fa fa-download" aria-hidden="true"></i>
+                            </span>
+                            </p>
+                            </div>
                         </form>
                     </div>
                     {% for word_attribute in word_data %}
-                    <div class="box">
+                    <div class="box is-dark">
                         <article class="media">
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <span class="title">Word: {{ word_attribute.name }}</span>
+                                        <span class="title is-3">Word: {{ word_attribute.name }}</span>
                                         <br>
                                         <h3 >Definition(s):  &nbsp {{ word_attribute.definition }} </h3>
                                         <h5>Short Definition:  &nbsp {{ word_attribute.shortdefinition }}</h5>
@@ -78,8 +99,12 @@
             </div>
         </div>
     </section>
-    <footer class="footer">
-    </footer>
+    <p></p>
 </body>
-
+<footer class="card-footer has-background-link">
+    <p class = " card-footer-item has-text-white">
+        <span class="has-text-white">Created by Ritij Jutur <i class="fa fa-copyright" aria-hidden="true"></i> <i class="fa fa-trademark" aria-hidden="true"></i> <i class="fa fa-registered" aria-hidden="true"></i>&nbsp;&nbsp;2020</span>
+    </p>
+    <a style = "color:white" href="https://icons8.com/icon/79908/musicbee">MusicBee icon by Icons8</a> 
+</footer>
 </html>
