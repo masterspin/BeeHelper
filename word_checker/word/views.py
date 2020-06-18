@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import requests
-from .models import Word
+from .models import Word,Usage
 from .forms import WordForm
 from django.core.files.storage import FileSystemStorage
 import glob, os, os.path
@@ -19,8 +19,13 @@ def index(request):
 	arrduplicate = []
 	global arr
 	arr=[]
+	usages = Usage.objects.all()
 	words = Word.objects.all()
 	if request.method == 'POST':
+		for usage in usages:
+			x = usage.uploadCount
+		Usage.objects.all().delete()
+		Usage.objects.create(uploadCount = x+1)
 		Word.objects.all().filter(date__lte=datetime.now()-timedelta(hours=48)).delete()
 		# for j in words:
 		# 	if(datetime.now()-j.date.replace(tzinfo=None)>timedelta(minutes=1).total_seconds()):
@@ -229,6 +234,8 @@ def index(request):
 	#os.remove('\\Users\\ritij\\Words\\word_checker\\media\\'+'Excel_File.xlsx')
 	
 	#return response
+
+
 	words = Word.objects.all()
 	for word in words:
 		if word.name in arr:
