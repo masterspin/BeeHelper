@@ -15,7 +15,7 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
-                    Word Attributes
+                    Spelling Bee Helper
                 </h1>
             </div>
         </div>
@@ -42,11 +42,16 @@
                 <div class="column is-offset-0 is-12">
                     <div class="content">
                         <h1>Upload</h1>
-                        <p>Each word should be on its own line</p>
+                        <p>Step 1: Choose File</p>
+                        <p>Step 2: Upload File</p>
+                        <p>Step 3: Download CSV File</p>
                         <form method = "post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="file" name = "document">
                             <button type = "submit">Upload <b>Text(.txt)</b> File</button>
+                        </form>
+                        <form action = "/download">
+                        <input type="submit" value="Download CSV file of  words uploaded" />
                         </form>
                     </div>
                     {% for word_attribute in word_data %}
@@ -55,13 +60,14 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <span class="title">Word: {{ word_attribute.word }}</span>
+                                        <span class="title">Word: {{ word_attribute.name }}</span>
                                         <br>
-                                        <h3>Definition:  &nbsp {{ word_attribute.short_definition }}</h3>
+                                        <h3 >Definition(s):  &nbsp {{ word_attribute.definition }} </h3>
+                                        <h5>Short Definition:  &nbsp {{ word_attribute.shortdefinition }}</h5>
                                         <h5> Example(s):  &nbsp {{word_attribute.example}}</h3>
-                                        <br> Part of Speech: {{word_attribute.partOfSpeech }}
-                                        <br> Origin: {{word_attribute.Origin }}
-                                        <br> Date: {{word_attribute.Date }}
+                                        <br> Part of Speech: {{word_attribute.pos }}
+                                        <br> Origin: {{word_attribute.origin }}
+                                        <br> Date: {{word_attribute.when }}
                                     </p>
                                 </div>
                             </div>

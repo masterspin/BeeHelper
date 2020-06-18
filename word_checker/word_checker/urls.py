@@ -23,6 +23,7 @@ from word import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('word.urls')),
+    path('download/', views.download,name='download'),
 ]
 
 # if settings.DEBUG:
