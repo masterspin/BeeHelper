@@ -244,7 +244,7 @@ def index(request):
 	for word in words:
 		if word.name in arr:
 			word_data.append(word)
-	context = {'word_data':word_data}
+	context = {'word_data':word_data, 'uploadBoolean':uploadBoolean}
 	return render(request,'word/word.html', context)
 
 
