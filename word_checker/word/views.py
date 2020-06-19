@@ -138,6 +138,10 @@ def index(request):
 		Origin = Origin.replace("|by:1|","")
 		Origin = Origin.replace("|out:1|","")
 		Origin = Origin.replace(":1","")
+		Origin = Origin.replace(":2","")
+		Origin = Origin.replace(":3","")
+		Origin = Origin.replace(":4","")
+		Origin = Origin.replace(":5","")
 
 		Date = ""
 		if 'date' in r[0]:
