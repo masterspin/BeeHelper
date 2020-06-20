@@ -4,7 +4,6 @@ from .models import Word,Usage
 from .forms import WordForm
 from django.core.files.storage import FileSystemStorage
 import glob, os, os.path
-import xlsxwriter
 import csv
 from django.http import HttpResponse
 from datetime import datetime,timedelta
@@ -30,7 +29,12 @@ def index(request):
 		# for j in words:
 		# 	if(datetime.now()-j.date.replace(tzinfo=None)>timedelta(minutes=1).total_seconds()):
 		# 		Word.objects.filter(name=j.name).delete()
-		uploaded_file = request.FILES['document']
+		uploaded_file = request.FILES.get('document')
+		if uploaded_file == None:
+			error = "Please choose a file before uploading"
+			word_data = []
+			context = {'word_data':word_data, 'error':error}
+			return render(request,'word/word.html', context)
 		fs = FileSystemStorage()
 		fs.save(uploaded_file.name, uploaded_file)
 		file = open('\\Users\\ritij\\Words\\word_checker\\media\\'+uploaded_file.name)
@@ -244,7 +248,8 @@ def index(request):
 	for word in words:
 		if word.name in arr:
 			word_data.append(word)
-	context = {'word_data':word_data}
+	error = ""
+	context = {'word_data':word_data, 'error':error}
 	return render(request,'word/word.html', context)
 
 

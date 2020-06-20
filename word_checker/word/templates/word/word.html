@@ -48,19 +48,19 @@
                     <div class="content">
                         <h2>Upload Process</h2>
                         <p>Step 1: Choose File (File should include a list of words- one word on each line)</p>
-                        <p>Step 2: Upload File</p>
+                        <p>Step 2: Upload File <b>Make sure to choose a file before uploading</b></p>
                         <p>Step 3: Download CSV File</p>
                         <form method = "post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="column is-one-fifth">
                             <p class="control has-icons-left has-icons-right">
-                                <input class="input is-info is-small is-link is-rounded" type="file" name = "document">
+                                <input class="input is-info is-small is-link is-rounded" type="file" name = "document" id="chooseFile">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-upload" aria-hidden="true"></i>
                                 </span>
                             </p>
                             <p>
-                                <button class="button is-small is-link is-rounded" type = "submit">Upload &nbsp;<b> Text(.txt) &nbsp;</b> File</button>         
+                                <button  class="button is-small is-link is-rounded" type = "submit">Upload &nbsp;<b> Text(.txt) &nbsp;</b> File</button>         
                             </p>
                             </div>
                         </form>
@@ -95,6 +95,7 @@
                         </article>
                     </div>
                     {% endfor %}
+                    <center><h1 class = "title is-4 has-text-warning has-background-danger"><b>{{ error }}</b></h1></center>
                 </div>
             </div>
         </div>
