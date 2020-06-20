@@ -30,11 +30,19 @@ def index(request):
 		# 	if(datetime.now()-j.date.replace(tzinfo=None)>timedelta(minutes=1).total_seconds()):
 		# 		Word.objects.filter(name=j.name).delete()
 		uploaded_file = request.FILES.get('document')
+
 		if uploaded_file == None:
 			error = "Please choose a file before uploading"
 			word_data = []
 			context = {'word_data':word_data, 'error':error}
 			return render(request,'word/word.html', context)
+
+		elif uploaded_file.name[-4:].lower() != ".txt":
+			error = "Please upload a text file(.txt)"
+			word_data = []
+			context = {'word_data':word_data, 'error':error}
+			return render(request,'word/word.html', context)
+
 		fs = FileSystemStorage()
 		fs.save(uploaded_file.name, uploaded_file)
 		file = open('\\Users\\ritij\\Words\\word_checker\\media\\'+uploaded_file.name)
