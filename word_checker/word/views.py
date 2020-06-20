@@ -41,6 +41,7 @@ def index(request):
 			error = "Please upload a text file(.txt)"
 			word_data = []
 			context = {'word_data':word_data, 'error':error}
+			# os.remove('\\Users\\ritij\\Words\\word_checker\\media\\'+uploaded_file.name)
 			return render(request,'word/word.html', context)
 
 		fs = FileSystemStorage()
