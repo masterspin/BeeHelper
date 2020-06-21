@@ -13,6 +13,7 @@ from django.utils import timezone
 # Create your views here.
 
 arr=[]
+# uploaded = False
 def index(request):
 	url = 'https://dictionaryapi.com/api/v3/references/collegiate/json/{}?key=19a9261a-6c93-4bc2-a179-83d7cc4189df'	
 	arrduplicate = []
@@ -43,7 +44,6 @@ def index(request):
 			context = {'word_data':word_data, 'error':error}
 			# os.remove('\\Users\\ritij\\Words\\word_checker\\media\\'+uploaded_file.name)
 			return render(request,'word/word.html', context)
-
 		fs = FileSystemStorage()
 		fs.save(uploaded_file.name, uploaded_file)
 		file = open('\\Users\\ritij\\Words\\word_checker\\media\\'+uploaded_file.name)
@@ -59,6 +59,8 @@ def index(request):
 				arrduplicate.remove(i.name)
 		os.remove('\\Users\\ritij\\Words\\word_checker\\media\\'+uploaded_file.name)
 	word_data = []
+	# global uploaded
+	# uploaded = True
 
 	# for i in words:
 	# 	if i not in arr:
@@ -89,7 +91,10 @@ def index(request):
 			if 'sseq' in r[0]['def'][0]:
 				for i in range(len(r[0]['def'][0]['sseq'])):
 					if 'dt' in r[0]['def'][0]['sseq'][i][0][1]:
-						definition += r[0]['def'][0]['sseq'][i][0][1]['dt'][0][1]+"++"
+						if 'uns' in r[0]['def'][0]['sseq'][i][0][1]['dt'][0]:
+							definition += r[0]['def'][0]['sseq'][i][0][1]['dt'][0][1][0][0][1]
+						else:
+							definition += (r[0]['def'][0]['sseq'][i][0][1]['dt'][0][1]+"++")
 		# print(definition)
 		definition = definition.replace("{bc}","")
 		definition = definition.replace("{sx","")
@@ -531,3 +536,9 @@ def download(request):
 # 	context = {'word_data' : word_data, 'form':form}
 
 # 	return render(request, 'word/word.html',context)
+
+
+# def processing(request):
+# 	loading = "processing"
+# 	ctxt = {'uploaded':uploaded,'loading':loading}
+# 	return render(request, 'word/word.html',ctxt)
