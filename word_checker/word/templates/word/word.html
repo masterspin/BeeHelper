@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <section class="hero is-small is-link is-bold">
+    <!-- <section class="hero is-small is-link is-bold">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title is-2 is-family-monospace">
@@ -25,26 +25,34 @@
 
             </div>
         </div>
-    </section>
-   <!--  <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                {{form.name}}
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </section> -->
+    <section>
+        <div class="block">
+                <nav class="navbar is-link">
+                    <div class="container">
+                        <h2 class="title is-2 pb-4 pt-1 is-family-monospace" style="color: white;">
+                            BeeHelper
+                            <a href="https://icons8.com/icon/79908/musicbee">
+                            <img src="https://img.icons8.com/color/48/000000/musicbee.png"/>
+                            </a>
+                        </h2>
+
+                    </div>
+                </nav>
+                <div class="tabs pl-5">
+                  <ul>
+                    <li class="is-active"><b><a href="/home">Home</a></b></li>
+                    <li><b><a href="/feedback" style="color: grey">Feedback</a></b></li>
+                  </ul>
+                </div>
+            </div> 
+    </section>
+
+    
     <section class="section has-background-light">
         <div class="container">
             <div class="columns">
+            <div class="column">
                 <div class="column is-offset-0 is-12">
                     <div class="content">
                         <h2>Upload Process</h2>
@@ -79,6 +87,15 @@
                             </div>
                         </form>
                     </div>
+                    <!-- <div class="column">
+                        <div>
+                            <div class="content">
+                                <h2>Example File</h2>
+                                <img style = "width:50%;"src="/static/image/exampleList.png" alt="Image not loading"/>
+                            </div>
+                        </div>
+                    </div> -->
+                    </div>
                     {% for word_attribute in word_data %}
                     <div class="box is-dark">
                         <article class="media">
@@ -87,7 +104,7 @@
                                     <p>
                                         <span class="title is-3">Word: {{ word_attribute.name }}</span>
                                         <br>
-                                        <h3 >Definition(s):  &nbsp {{ word_attribute.definition }} </h3>
+                                        <h3 >Definition(s):  &nbsp {{ word_attribute.definition|linebreaksbr }} </h3>
                                         <h5>Short Definition:  &nbsp {{ word_attribute.shortdefinition }}</h5>
                                         <h5> Example(s):  &nbsp {{word_attribute.example}}</h3>
                                         <br> Part of Speech: {{word_attribute.pos }}
@@ -104,12 +121,11 @@
             </div>
         </div>
     </section>
-    <p></p>
 </body>
 <footer class="card-footer has-background-link">
     <p class = " card-footer-item has-text-white">
         <span class="has-text-white">Created by Ritij Jutur <i class="fa fa-copyright" aria-hidden="true"></i> <i class="fa fa-trademark" aria-hidden="true"></i> <i class="fa fa-registered" aria-hidden="true"></i>&nbsp;&nbsp;2020</span>
     </p>
-    <a style = "color:white" href="https://icons8.com/icon/79908/musicbee">MusicBee icon by Icons8</a> 
+    <a style = "color:white" href="https://icons8.com/icon/79908/musicbee">MusicBee icon by Icons8</a>
 </footer>
 </html>

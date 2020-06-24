@@ -1,11 +1,11 @@
 from django.shortcuts import render
 import requests
 from .models import Word,Usage
-from .forms import WordForm
+from .forms import WordForm, FeedbackForm
 from django.core.files.storage import FileSystemStorage
 import glob, os, os.path
 import csv
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime,timedelta
 from django.utils import timezone
 
@@ -92,7 +92,7 @@ def index(request):
 				for i in range(len(r[0]['def'][0]['sseq'])):
 					if 'dt' in r[0]['def'][0]['sseq'][i][0][1]:
 						if 'uns' in r[0]['def'][0]['sseq'][i][0][1]['dt'][0]:
-							definition += r[0]['def'][0]['sseq'][i][0][1]['dt'][0][1][0][0][1]
+							definition += r[0]['def'][0]['sseq'][i][0][1]['dt'][0][1][0][0][1]+"++"
 						else:
 							definition += (r[0]['def'][0]['sseq'][i][0][1]['dt'][0][1]+"++")
 		# print(definition)
@@ -542,3 +542,25 @@ def download(request):
 # 	loading = "processing"
 # 	ctxt = {'uploaded':uploaded,'loading':loading}
 # 	return render(request, 'word/word.html',ctxt)
+
+
+
+
+
+
+def feedback(request):
+	submitted = ""
+
+	if request.method=='POST':
+		form = FeedbackForm(request.POST)
+
+		if form.is_valid():
+			form.save()
+			form = FeedbackForm()
+			submitted = "Successfully Submitted"
+
+	else:
+		form=FeedbackForm()
+
+	context={'form':form, 'submitted':submitted}
+	return render(request,"word/feedback.html",context)

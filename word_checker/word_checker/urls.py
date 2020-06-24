@@ -23,6 +23,8 @@ from word import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('word.urls')),
+    path('home/', include('word.urls')),
+    path('feedback/', views.feedback,name='feedback'),
     path('download/', views.download,name='download'),
 ]
 

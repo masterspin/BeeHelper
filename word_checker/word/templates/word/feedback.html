@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BeeHelper</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css" />
+    <link rel="icon" href="https://img.icons8.com/color/48/000000/musicbee.png"/>
+</head>
+
+<body>
+    <section>
+        <div class="block">
+                <nav class="navbar is-link">
+                    <div class="container">
+                        <h2 class="title is-2 pb-4 pt-1 is-family-monospace" style="color: white;">
+                            BeeHelper
+                            <a href="https://icons8.com/icon/79908/musicbee">
+                            <img src="https://img.icons8.com/color/48/000000/musicbee.png"/>
+                            </a>
+                        </h2>
+
+                    </div>
+                </nav>
+                <div class="tabs pl-5">
+                  <ul>
+                    <li><b><a href="/home" style="color: grey">Home</a></li></b>
+                    <li class="is-active"><b><a href="#">Feedback</a></li></b>
+                  </ul>
+                </div>
+            </div> 
+    </section>
+    <br>
+    <section>
+        <div class="column">
+            <h2 class="title is-4 pb-4 pt-1" style="color: black;">
+                <center>Thank you for using this website<br>This page is for you to give feedback<br>Please fill out the form below</center>
+            </h2>
+            <form action = "{% url 'feedback' %}"method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="field column is-half">
+                    <label for="{{ field.id_for_label }}"></label>
+                    <center>{{ field }}</center>
+                </div>
+                <br>
+                {% endfor %}
+                <button class="button is-small is-link is-rounded" type="submit">Submit</button>
+            </form>
+        </div>
+        <center><h1 class = "title is-4 has-text-success has-background-primary"><b>{{ submitted }}</b></h1></center>
+
+
+    </section>
+</body>
+<footer class="card-footer has-background-link">
+    <p class = " card-footer-item has-text-white">
+        <span class="has-text-white">Created by Ritij Jutur <i class="fa fa-copyright" aria-hidden="true"></i> <i class="fa fa-trademark" aria-hidden="true"></i> <i class="fa fa-registered" aria-hidden="true"></i>&nbsp;&nbsp;2020</span>
+    </p>
+    <a style = "color:white" href="https://icons8.com/icon/79908/musicbee">MusicBee icon by Icons8</a>
+</footer>
+</html>
