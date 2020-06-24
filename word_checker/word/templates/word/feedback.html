@@ -29,7 +29,7 @@
                 <div class="tabs pl-5">
                   <ul>
                     <li><b><a href="/home" style="color: grey">Home</a></li></b>
-                    <li class="is-active"><b><a href="#">Feedback</a></li></b>
+                    <li class="is-active"><b><a href="/feedback">Feedback</a></li></b>
                   </ul>
                 </div>
             </div> 
@@ -42,17 +42,27 @@
             </h2>
             <form action = "{% url 'feedback' %}"method="post">
                 {% csrf_token %}
+                {% for non_field_error in form.non_field.errors %}
+                    <p class="help is-danger">{{non_field_error}}</p>
+                {% endfor %}
                 {% for field in form %}
                 <div class="field column is-half">
                     <label for="{{ field.id_for_label }}"></label>
                     <center>{{ field }}</center>
+                    {% if field.help_text %}
+                        <p class="help">{{field.help_text}}</p>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p class="help is-danger">{{error}}</p>
+                    {% endfor %}
                 </div>
                 <br>
                 {% endfor %}
                 <button class="button is-small is-link is-rounded" type="submit">Submit</button>
             </form>
         </div>
-        <center><h1 class = "title is-4 has-text-success has-background-primary"><b>{{ submitted }}</b></h1></center>
+        <center><h1 class = "title is-4 has-text-white has-background-success"><b>{{ submitted }}</b></h1></center>
+        <br>
 
 
     </section>
