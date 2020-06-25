@@ -29,43 +29,36 @@
                 <div class="tabs pl-5">
                   <ul>
                     <li><b><a href="/home" style="color: grey">Home</a></li></b>
-                    <li class="is-active"><b><a href="/feedback">Feedback</a></li></b>
-                    <li><b><a href="/about" style="color: grey">About</a></li></b>
+                    <li><b><a href="/feedback" style="color: grey">Feedback</a></li></b>
+                    <li class="is-active"><b><a href="/about">About</a></li></b>
+
                   </ul>
                 </div>
             </div> 
     </section>
-    <br>
-    <section>
-        <div class="column">
-            <h2 class="title is-4 pb-4 pt-1" style="color: black;">
-                <center>Thank you for using this website<br>This page is for you to give feedback<br>Please fill out the form below</center>
-            </h2>
-            <form action = "{% url 'feedback' %}"method="post">
-                {% csrf_token %}
-                {% for non_field_error in form.non_field.errors %}
-                    <p class="help is-danger">{{non_field_error}}</p>
-                {% endfor %}
-                {% for field in form %}
-                <div class="field column is-half">
-                    <label for="{{ field.id_for_label }}"></label>
-                    <center>{{ field }}</center>
-                    {% if field.help_text %}
-                        <p class="help">{{field.help_text}}</p>
-                    {% endif %}
-                    {% for error in field.errors %}
-                        <p class="help is-danger">{{error}}</p>
-                    {% endfor %}
-                </div>
-                <br>
-                {% endfor %}
-                <button class="button is-small is-link is-rounded" type="submit">Submit</button>
-            </form>
-        </div>
-        <center><h1 class = "title is-4 has-text-white has-background-success"><b>{{ submitted }}</b></h1></center>
-        <br>
 
-
+    <section class="section has-background-light">
+        <div class="container">
+            <div class="columns">
+            <div class="column">
+                <div class="column is-offset-0 is-12">
+                    <div class="content">
+				    	<div class="box is-dark">
+	                        <article class="media">
+	                            <div class="media-content">
+	                                <div class="content">
+	                                    <p>
+	                                    	Spelling bee participants are often provided a list of words to prepare. It's tedious to search each word in the dictionary to get all the information needed. This application makes it easy to get all the information easily with a few clicks.
+	                                    </p>
+	                                </div>
+	                            </div>
+	                        </article>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+		</div>
     </section>
 </body>
 <footer class="card-footer has-background-link">

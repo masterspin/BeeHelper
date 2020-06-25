@@ -564,3 +564,7 @@ def feedback(request):
 
 	context={'form':form, 'submitted':submitted}
 	return render(request,"word/feedback.html",context)
+
+
+def about(request):
+   return render(request,'word/about.html')

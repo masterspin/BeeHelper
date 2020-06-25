@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('word.urls')),
     path('home/', include('word.urls')),
     path('feedback/', views.feedback,name='feedback'),
+    path('about/', views.about, name='about'),
     path('download/', views.download,name='download'),
 ]
 
