@@ -86,144 +86,156 @@ def index(request):
 # for i in range(0,short_definition_length):
 # 	short_definition = short_definition+r_data[0]['shortdef'][i] + "\t"
 
-		definition = ""
-		if 'def' in r[0]:
-			if 'sseq' in r[0]['def'][0]:
-				for i in range(len(r[0]['def'][0]['sseq'])):
-					if 'dt' in r[0]['def'][0]['sseq'][i][0][1]:
-						if 'uns' in r[0]['def'][0]['sseq'][i][0][1]['dt'][0]:
-							definition += r[0]['def'][0]['sseq'][i][0][1]['dt'][0][1][0][0][1]+"++"
-						else:
-							definition += (r[0]['def'][0]['sseq'][i][0][1]['dt'][0][1]+"++")
-		# print(definition)
-		definition = definition.replace("{bc}","")
-		definition = definition.replace("{sx","")
-		definition = definition.replace("{d_link","")
-		definition = definition.replace("d_link","")
-		definition = definition.replace("{/it}","")
-		definition = definition.replace("{it}","")
-		definition = definition.replace("||2}","")
-		definition = definition.replace("{dxt","")
-		definition = definition.replace("{dx}","")
-		definition = definition.replace("{dx_def}","")
-		definition = definition.replace("{/dx_def}","")
-		definition = definition.replace(":1||4","")
-		definition = definition.replace(":1||3","")
-		definition = definition.replace("||3","")
-		definition = definition.replace("||4","")
-		definition = definition.replace("||8","")
-		definition = definition.replace(":1","")
-		definition = definition.replace(":2","")
-		definition = definition.replace("||7","")
-		definition = definition.replace("|3b","")
-		definition = definition.replace("{/dx}","")
-		definition = definition.replace("||2}","")
-		definition = definition.replace("||1}","")
-		definition = definition.replace("||5b}","")
-		definition = definition.replace("||b}","")
-		definition = definition.replace("{a_link","")
-		definition = definition.replace("|","")
-		definition = definition.replace("}","")
-		definition = definition.replace("{","")
-		definition = definition.replace("++", "; ")
+		
+		
 
-		yesOrigin = False
+		if 'meta' not in r[0]:
+			Word.objects.create(name = word, definition = "", shortdefinition="", example="", pos="", origin = "", when = "")
 
-		Origin = ""
-		if 'et' not in r[0]:
-			yesOrigin=False
-			print("not in data")
 		else:
-			yesOrigin=True
+			definition = ""
+			if 'def' in r[0]:
+				if 'sseq' in r[0]['def'][0]:
+					for i in range(len(r[0]['def'][0]['sseq'])):
+						if 'dt' in r[0]['def'][0]['sseq'][i][0][1]:
+							if 'uns' in r[0]['def'][0]['sseq'][i][0][1]['dt'][0]:
+								definition += r[0]['def'][0]['sseq'][i][0][1]['dt'][0][1][0][0][1]+"++"
+							else:
+								definition += (r[0]['def'][0]['sseq'][i][0][1]['dt'][0][1]+"++")
+			# print(definition)
+			definition = definition.replace("{bc}","")
+			definition = definition.replace("{sx","")
+			definition = definition.replace("{d_link","")
+			definition = definition.replace("d_link","")
+			definition = definition.replace("{/it}","")
+			definition = definition.replace("{it}","")
+			definition = definition.replace("||2}","")
+			definition = definition.replace("{dxt","")
+			definition = definition.replace("{dx}","")
+			definition = definition.replace("{dx_def}","")
+			definition = definition.replace("{/dx_def}","")
+			definition = definition.replace(":1||4","")
+			definition = definition.replace(":1||3","")
+			definition = definition.replace("||3","")
+			definition = definition.replace("||4","")
+			definition = definition.replace("||8","")
+			definition = definition.replace(":1","")
+			definition = definition.replace(":2","")
+			definition = definition.replace("||7","")
+			definition = definition.replace("|3b","")
+			definition = definition.replace("{/dx}","")
+			definition = definition.replace("||2}","")
+			definition = definition.replace("||1}","")
+			definition = definition.replace("||5b}","")
+			definition = definition.replace("||b}","")
+			definition = definition.replace("{a_link","")
+			definition = definition.replace("|","")
+			definition = definition.replace("}","")
+			definition = definition.replace("{","")
+			definition = definition.replace("++", "; ")
 
-		if(yesOrigin==True):
-			Origin = r[0]['et'][0][1]
-		else:
+			yesOrigin = False
+
 			Origin = ""
 
-		Origin = Origin.replace("{ds||1|a|}","")
-		Origin = Origin.replace("{ds||1||}","")
-		Origin = Origin.replace("{it}","")
-		Origin = Origin.replace("{/it}","")
-		Origin = Origin.replace("{ma}","")
-		Origin = Origin.replace("{mat","")
-		Origin = Origin.replace("}{/ma}","")
-		Origin = Origin.replace("|void:3|","")
-		Origin = Origin.replace("{et_link|","")
-		Origin = Origin.replace("{","")
-		Origin = Origin.replace("}","")
-		Origin = Origin.replace("|by:1|, |out:1|","")
-		Origin = Origin.replace("|by:1|","")
-		Origin = Origin.replace("|out:1|","")
-		Origin = Origin.replace(":1","")
-		Origin = Origin.replace(":2","")
-		Origin = Origin.replace(":3","")
-		Origin = Origin.replace(":4","")
-		Origin = Origin.replace(":5","")
+			print(r[0])
 
-		Date = ""
-		if 'date' in r[0]:
-			Date = r[0]['date']
-		else:
-			Date = ""
-		Date = Date.replace("{ds||1|a|}","")
-		Date = Date.replace("{ds||1||}","")
-		Date = Date.replace("{ds||2||}","")
-		Date = Date.replace("{ds||7||}","")
-		Date = Date.replace("{ds|t|1||}","")
-		Date = Date.replace("{ds|t|1|a|}","")
-		Date = Date.replace("{ds||2|b|}","")
-		Date = Date.replace("{ds|i|3|a|}","")
-		Date = Date.replace("{ds","")
-		Date = Date.replace("||1","")
-		Date = Date.replace("|1","")
-		Date = Date.replace("|a|","")
-		Date = Date.replace("{","")
-		Date = Date.replace("}","")
-
-		example = ""
-
-		if 'dros' in r[0]:
-			example = example + r[0]['dros'][0]['drp'] + "; "
-		else:
-	 		example = ""
-
-
-
-
-		partOfSpeech = ""
-
-		if 'fl' in r[0]:
-	 		partOfSpeech = r[0]['fl']
-
-
-		short_definition=""
-
-		if 'shortdef' in r[0]:
-			short_definition = r[0]['shortdef']
-			if(short_definition == []):
-				short_definition = ""
+			if 'et' not in r[0]:
+				yesOrigin=False
+				print("not in data")
 			else:
-				short_definition = r[0]['shortdef'][0]
-		else:
+				yesOrigin=True
+
+			print(yesOrigin)
+
+			if(yesOrigin==True):
+				Origin = r[0]['et'][0][1]
+			else:
+				Origin = ""
+
+			Origin = Origin.replace("{ds||1|a|}","")
+			Origin = Origin.replace("{ds||1||}","")
+			Origin = Origin.replace("{it}","")
+			Origin = Origin.replace("{/it}","")
+			Origin = Origin.replace("{ma}","")
+			Origin = Origin.replace("{mat","")
+			Origin = Origin.replace("}{/ma}","")
+			Origin = Origin.replace("|void:3|","")
+			Origin = Origin.replace("{et_link|","")
+			Origin = Origin.replace("{","")
+			Origin = Origin.replace("}","")
+			Origin = Origin.replace("|by:1|, |out:1|","")
+			Origin = Origin.replace("|by:1|","")
+			Origin = Origin.replace("|out:1|","")
+			Origin = Origin.replace(":1","")
+			Origin = Origin.replace(":2","")
+			Origin = Origin.replace(":3","")
+			Origin = Origin.replace(":4","")
+			Origin = Origin.replace(":5","")
+
+			Date = ""
+			if 'date' in r[0]:
+				Date = r[0]['date']
+			else:
+				Date = ""
+			Date = Date.replace("{ds||1|a|}","")
+			Date = Date.replace("{ds||1||}","")
+			Date = Date.replace("{ds||2||}","")
+			Date = Date.replace("{ds||7||}","")
+			Date = Date.replace("{ds|t|1||}","")
+			Date = Date.replace("{ds|t|1|a|}","")
+			Date = Date.replace("{ds||2|b|}","")
+			Date = Date.replace("{ds|i|3|a|}","")
+			Date = Date.replace("{ds","")
+			Date = Date.replace("||1","")
+			Date = Date.replace("|1","")
+			Date = Date.replace("|a|","")
+			Date = Date.replace("{","")
+			Date = Date.replace("}","")
+
+			example = ""
+
+			if 'dros' in r[0]:
+				example = example + r[0]['dros'][0]['drp'] + "; "
+			else:
+		 		example = ""
+
+
+
+
+			partOfSpeech = ""
+
+			if 'fl' in r[0]:
+		 		partOfSpeech = r[0]['fl']
+
+
 			short_definition=""
- 	
 
-		# word_attribute = {
-		# 	'word' : word.name,
-		# 	'definition' : definition,#r_data[0]['def'][0]['sseq'][0][0][1]['dt'][0][1],
-		# 	# 'stems' : r_data[meta][stems],
-		# 	'short_definition':  short_definition,
-		# 	'example':  example, #r_data[0]['def'][0]['sseq'][0][0][1]['dt'][1][1][0]['t']
-		# 	'partOfSpeech': partOfSpeech,
-		# 	'Origin' : Origin,
-		# 	'Date': Date,
+			if 'shortdef' in r[0]:
+				short_definition = r[0]['shortdef']
+				if(short_definition == []):
+					short_definition = ""
+				else:
+					short_definition = r[0]['shortdef'][0]
+			else:
+				short_definition=""
+	 	
+
+			# word_attribute = {
+			# 	'word' : word.name,
+			# 	'definition' : definition,#r_data[0]['def'][0]['sseq'][0][0][1]['dt'][0][1],
+			# 	# 'stems' : r_data[meta][stems],
+			# 	'short_definition':  short_definition,
+			# 	'example':  example, #r_data[0]['def'][0]['sseq'][0][0][1]['dt'][1][1][0]['t']
+			# 	'partOfSpeech': partOfSpeech,
+			# 	'Origin' : Origin,
+			# 	'Date': Date,
 
 
-		# }
-		# print(word_attribute)
-		# word_data.append(word_attribute)
-		Word.objects.create(name = word, definition = definition, shortdefinition=short_definition, example=example, pos=partOfSpeech, origin = Origin, when = Date)
+			# }
+			# print(word_attribute)
+			# word_data.append(word_attribute)
+			Word.objects.create(name = word, definition = definition, shortdefinition=short_definition, example=example, pos=partOfSpeech, origin = Origin, when = Date)
 	# workbook = xlsxwriter.Workbook('C:/Users/ritij/Words/word_checker/media/Excel_File.xlsx')
 	# worksheet = workbook.add_worksheet()
 	# bold = workbook.add_format({'bold': True})
