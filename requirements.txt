@@ -52,7 +52,7 @@ mistune==0.8.4
 multidict==4.7.5
 nbconvert==5.6.1
 nbformat==5.0.4
-notebook==6.0.3
+notebook==6.4.12
 odfpy==1.4.1
 openpyxl==3.0.3
 pandocfilters==1.4.2
