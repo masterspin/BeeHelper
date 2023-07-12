@@ -59,7 +59,7 @@ pandocfilters==1.4.2
 parso==0.6.0
 pickleshare==0.7.5
 Pillow==9.3.0
-pipenv==2018.11.26
+pipenv==2022.1.8
 prometheus-client==0.7.1
 prompt-toolkit==3.0.2
 pyexcel-io==0.5.20
