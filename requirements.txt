@@ -78,7 +78,7 @@ pywinpty==0.5.7
 PyYAML==5.3.1
 pyzmq==18.1.1
 reportlab==3.5.42
-requests==2.23.0
+requests==2.31.0
 Send2Trash==1.5.0
 six==1.12.0
 sqlparse==0.3.0
